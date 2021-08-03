@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1035240369616",
+    "project_id": "hello-android-a3daa",
+    "storage_bucket": "hello-android-a3daa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1035240369616:android:60950a341d6eaa61a79dd5",
+        "android_client_info": {
+          "package_name": "com.inqu0302.chatt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1035240369616-m7qo0lgkgk3r9dh7rod3ns9g3pbel6dc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHuACfTJi9QNCsDu_Ej7S7UPhEog8Q9x4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1035240369616-m7qo0lgkgk3r9dh7rod3ns9g3pbel6dc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
