@@ -1,5 +1,7 @@
 package com.inqu0302.chatt;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,10 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.inqu0302.chatt.Adapter.ChattAdapter;
 import com.inqu0302.chatt.model.Chatt;
+import com.inqu0302.chatt.service.FirebaseServiceImplV1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,38 +43,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /**
-         *  setContentView(R.layout.activity_main)
-         *  layout.xml 파일을 읽어서 화면에 뛰우는 메서드
-         */
-
-        FirebaseDatabase dbConn = FirebaseDatabase.getInstance();
-
-        // 사용할 table(path)
-        // realtimeDatabase에서는 table을 path라는 개념으로 부른다
-        dbRef = dbConn.getReference("chatting");
-
         txt_msg = findViewById(R.id.txt_msg);
         btn_send = findViewById(R.id.btn_send);
 
         chat_list_view = findViewById(R.id.chatt_list_view);
 
-        // 보여줄 데이터 객체 생성
         chattList = new ArrayList<Chatt>();
-        Chatt chatt = new Chatt();
-        chatt.setName("홍길동");
-        chatt.setMsg("반갑습니다");
-        chattList.add(chatt);
-
-        chatt = new Chatt();
-        chatt.setName("성춘향");
-        chatt.setMsg("안녕하세요");
-        chattList.add(chatt);
-
-        chatt = new Chatt();
-        chatt.setName("이몽룡");
-        chatt.setMsg("반가워요");
-        chattList.add(chatt);
 
         // 1. Adapter 객체생성
         // Adapter 객체를 생성할때 보여줄 데이터 객체를 생성자 매개변수로 주입해 주어야 한다.
@@ -81,6 +60,40 @@ public class MainActivity extends AppCompatActivity {
         // 3. RecyclerView의 데이터를 표현할때 사용할 Layout 매니저를 설정하기
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         chat_list_view.setLayoutManager(layoutManager);
+        /**
+         *  setContentView(R.layout.activity_main)
+         *  layout.xml 파일을 읽어서 화면에 뛰우는 메서드
+         */
+
+        FirebaseDatabase dbConn = FirebaseDatabase.getInstance();
+
+        // 사용할 table(path)
+        // realtimeDatabase에서는 table을 path라는 개념으로 부른다
+        dbRef = dbConn.getReference("chatting");
+
+        // firebase로부터 데이터 변화 이벤트가 전달되면 이벤트를 수신하여 할일을 지정하기 위한 핸들러 선언
+        ChildEventListener childEventListener = new FirebaseServiceImplV1(chattAdapter);
+
+        // 이벤트 핸들러 연결결
+        dbRef.addChildEventListener(childEventListener);
+
+        // 보여줄 데이터 객체 생성
+//        Chatt chatt = new Chatt();
+//        chatt.setName("홍길동");
+//        chatt.setMsg("반갑습니다");
+//        chattList.add(chatt);
+//
+//        chatt = new Chatt();
+//        chatt.setName("성춘향");
+//        chatt.setMsg("안녕하세요");
+//        chattList.add(chatt);
+//
+//        chatt = new Chatt();
+//        chatt.setName("이몽룡");
+//        chatt.setMsg("반가워요");
+//        chattList.add(chatt);
+
+
 
         /**
          * EditBox에 메시지를 입력하고 Send 버튼을클릭했을때 할일 지정하기
@@ -94,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             if(msg != null && !msg.isEmpty()){
 
                 String toastMsg = String.format("메시지 : %s", msg);
-                Toast.makeText(MainActivity.this, toastMsg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, toastMsg, Toast.LENGTH_SHORT).show();
 
                 Chatt chattVO = new Chatt();
                 chattVO.setMsg(msg);
