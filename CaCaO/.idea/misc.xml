@@ -5,7 +5,11 @@
       <map>
         <entry key="..\:/cording/Android/CaCaO/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38385416666666666" />
         <entry key="..\:/cording/Android/CaCaO/app/src/main/res/layout/activity_main.xml" value="0.3541666666666667" />
+        <entry key="..\:/cording/Android/CaCaO/app/src/main/res/layout/activity_settings.xml" value="0.2708333333333333" />
         <entry key="..\:/cording/Android/CaCaO/app/src/main/res/layout/chatt_item.xml" value="0.3541666666666667" />
+        <entry key="..\:/cording/Android/CaCaO/app/src/main/res/layout/settings_activity.xml" value="0.275" />
+        <entry key="..\:/cording/Android/CaCaO/app/src/main/res/menu/main_tool_menu.xml" value="0.27291666666666664" />
+        <entry key="..\:/cording/Android/CaCaO/app/src/main/res/xml/root_preferences.xml" value="0.275" />
       </map>
     </option>
   </component>

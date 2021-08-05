@@ -9,9 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CaCaO">
+
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_settings"/>
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@layout/settings_activity" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.CaCaO.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
