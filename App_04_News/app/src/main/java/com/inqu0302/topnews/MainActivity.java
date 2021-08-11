@@ -5,6 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.inqu0302.topnews.databinding.ActivityMainBinding;
+import com.inqu0302.topnews.service.NaverService;
+import com.inqu0302.topnews.service.impl.NaverServiceImplV1;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,18 +32,24 @@ public class MainActivity extends AppCompatActivity {
         /**
          * 기존에 사용하던
          * setContentView(R.layout.activity_main);를
-         *  main_binding = ActivityMainBinding.inflate(getLayoutInflater());
-         *         setContentView(main_binding.getRoot());
-         *         로 변경
+         *
+         * main_binding = ActivityMainBinding.inflate(getLayoutInflater());
+         * setContentView(main_binding.getRoot());
+         * 로 변경
          *
          * 이 코드로 시작이 되면 activity.xml 파일에 있는 모든 view Component가
          * 한꺼번에 사용가능한 상태로 변경된다
          */
-        setContentView(R.layout.activity_main);
-
         main_binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(main_binding.getRoot());
 
-        setContentView(R.layout.activity_main);
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+        String curDate = sd.format(date);
+
+        NaverService naverService
+                = new NaverServiceImplV1(main_binding.newsListView);
+        naverService.getNews(curDate);
+
     }
 }
